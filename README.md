@@ -15,8 +15,5 @@ proot-distro login debian
 ```
 curl -sSL "https://raw.githubusercontent.com/justaCasualCoder/Zoneminder-Termux/main/installzm.sh" | bash
 ```
-<<<<<<< HEAD
 ### Setting up on-device cameras
 The simplest way I have found to pass through cameras is by running a ip camera server on the phone. The app i have been using is [Cameraserve](https://github.com/arktronic/cameraserve). Although it has not been updated since 2019, it is a Free & Open source app that does everything I could want (It also dosent have ads or telemetry :) ). You can also just download one of the many ip camera apps on google play if you find that easier. Anyway, Once you have all of that set up run the app, change the port to 8082, and add it in Zoneminder. [There are multiple guides on how to do this](https://zoneminder.readthedocs.io/en/stable/userguide/gettingstarted.html)
-=======
->>>>>>> da7c0da74bd21985e03e75e07ef158632485eff6
