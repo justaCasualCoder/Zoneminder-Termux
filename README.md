@@ -1,5 +1,5 @@
 # Zoneminder On Android!
-This is a bash script auto installs Zoneminder,Apache2, and Mysql. 
+This is a bash script auto installs Zoneminder , Apache2 , and Mysql. 
 ## Getting started on Android
 1. Donwload [Termux](https://f-droid.org/en/packages/com.termux/)
 2. Set up a proot container 
