@@ -54,4 +54,7 @@ if [ $answer == y ]; then
     echo "/etc/init.d/mariadb start" >> ~/.profile
     echo "/etc/init.d/zoneminder start" >> ~/.profile
 fi
+cd /
+wget https://raw.githubusercontent.com/justaCasualCoder/Zoneminder-Termux/main/initzm.sh 
 echo "You can now connect to Zoneminder at $(ip -oneline -family inet address show | grep "${IPv4bare}/" |  awk '{print $4}' | awk 'END {print}' | sed 's/.\{3\}$//'):8080"
+echo "To start it you can run this command at the / dir : bash initzm.sh"
