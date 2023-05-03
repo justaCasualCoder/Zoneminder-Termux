@@ -7,7 +7,7 @@ case $version in
      echo "You selected 1.34!"
      ;;
     1.36)
-     echo "You selected 1.36"
+     echo "You selected 1.36!"
      ;;
     *)
      echo "Unkown version $version"
@@ -44,6 +44,12 @@ a2enconf zoneminder
 a2enmod rewrite
 a2enmod headers
 a2enmod expires
+echo "Fixing API.."
+cd /etc/apache2/conf-enabled/
+mv zoneminder.conf zoneminder.conf.bak  
+wget "https://raw.githubusercontent.com/justaCasualCoder/Zoneminder-Termux/main/zoneminder.conf"
+chown www-data:www-data zoneminder.conf
+cd /
 sed -i 's/80/8080/g' /etc/apache2/ports.conf
 /etc/init.d/mariadb restart
 /etc/init.d/apache2 start
