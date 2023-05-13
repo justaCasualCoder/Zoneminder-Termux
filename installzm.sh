@@ -13,7 +13,7 @@ apt-get install liblwp-protocol-https-perl
 mkdir -R /etc/zm/apache2/ssl/
 openssl req -x509 -nodes -days 4096 -newkey rsa:2048 -keyout /etc/zm/apache2/ssl/zoneminder.key -out /etc/zm/apache2/ssl/zoneminder.crt
 ./install.sh
-echo "Install Complete! - You still have to edit /etc/zm/secrets.ini to contain your IP address and admin password etc"
+echo "Install Complete! - You still have to edit /etc/zm/secrets.ini to contain your IP address and admin password"
 }
 echo -n "Which version of ZM do you want to use? [1.34 or 1.36]: " ; read version
 case $version in
