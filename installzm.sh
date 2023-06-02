@@ -1,4 +1,6 @@
 #!/bin/bash
+#Arg Parse from https://betterdev.blog/minimal-safe-bash-script-template/
+#justaCasualCoder 2023 - https://github.com/justaCasualCoder
 RED='\033[0;31m'
 install_evserver() {
 apt install git -y
@@ -24,12 +26,14 @@ case $version in
      ;;
     *)
      echo "Unknown version $version"
-     exit 0
+     echo "Going with defualt : 1.36 "
+     version=1.36
 esac
 echo -n "Are you sure you want to install Zoneminder? [y/n]: " ; read yn
+[[ -z $yn ]] && echo "Going with defualt : n" && yn=n
 if [ $yn != y ]; then
     printf "${RED}Aborted\n"
-    exit 0
+    exit 1
 fi
 apt update
 apt install gpgv
@@ -51,17 +55,19 @@ else
 fi
 mariadb -u zmuser -pzmpass < /usr/share/zoneminder/db/zm_create.sql
 chgrp -c www-data /etc/zm/zm.conf
-a2enconf zoneminder
 adduser www-data video
 a2enconf zoneminder
 a2enmod rewrite
 a2enmod headers
 a2enmod expires
 echo "Fixing API.."
-cd /etc/apache2/conf-enabled/
-mv zoneminder.conf zoneminder.conf.bak  
-wget "https://raw.githubusercontent.com/justaCasualCoder/Zoneminder-Termux/main/zoneminder.conf"
-chown www-data:www-data zoneminder.conf
+chown -R www-data:www-data /usr/share/zoneminder
+cat << END >> /etc/apache2/conf-available/zoneminder.conf
+<Directory /usr/share/zoneminder/www/api>
+    AllowOverride All
+</Directory>
+END
+chown www-data:www-data /etc/apache2/conf-available/zoneminder.conf
 cd /
 sed -i 's/80/8080/g' /etc/apache2/ports.conf
 /etc/init.d/mariadb restart
@@ -69,6 +75,7 @@ sed -i 's/80/8080/g' /etc/apache2/ports.conf
 /etc/init.d/zoneminder start
 yn=""
 echo -n "Would you like to make Zoneminder start automatically on startup? (just adds the above command to .profile) [y/n]: " ; read yn
+[[ -z $yn ]] && echo "Going with defualt : y" && yn=y
 if [ $yn == y ]; then
     echo "/etc/init.d/apache2 start" >> ~/.profile
     echo "/etc/init.d/mariadb start" >> ~/.profile
@@ -76,10 +83,13 @@ if [ $yn == y ]; then
 fi
 cd /
 yn=""
-wget https://raw.githubusercontent.com/justaCasualCoder/Zoneminder-Termux/main/initzm.sh 
-echo -n "Would you like to install ZM event server? [y/n]: " ; read yn
-if [ $yn == y ]; then
+wget https://raw.githubusercontent.com/justaCasualCoder/Zoneminder-Termux/main/initzm.sh
+if [ $beta = 1 ]; then
+    echo -n "Would you like to install ZM event server? [y/n]: " ; read yn
+    [[ -z $OS ]] && echo "Going with defualt : n" && yn=n
+    if [ $yn == y ]; then
     install_evserver
+    fi
 fi
-echo "You can now connect to Zoneminder at $(ip -oneline -family inet address show | grep "${IPv4bare}/" |  awk '{print $4}' | awk 'END {print}' | sed 's/.\{3\}$//'):8080"
+echo "You can now connect to Zoneminder at $(ip -oneline -family inet address show | grep "${IPv4bare}/" |  awk '{print $4}' | awk 'END {print}' | sed 's/.\{3\}$//'):8080/zm"
 echo "To start it you can run this command at the / dir : bash initzm.sh"
