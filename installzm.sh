@@ -92,7 +92,6 @@ cat << END >> /etc/apache2/conf-available/zoneminder.conf
 </Directory>
 END
 chown www-data:www-data /etc/apache2/conf-available/zoneminder.conf
-cd /
 sed -i 's/80/8080/g' /etc/apache2/ports.conf
 /etc/init.d/mariadb restart
 /etc/init.d/apache2 start
