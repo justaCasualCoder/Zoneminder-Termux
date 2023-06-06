@@ -32,3 +32,6 @@ The simplest way I have found to pass through cameras is by running a ip camera 
 - Open Source
 - I had found [this](https://github.com/tapans/DIY-Surveillance-with-Smartphones) and liked the idea but it was far to outdated to use
 - I had the time
+
+### Setting up on-device cameras
+The simplest way I have found to pass through cameras is by running a ip camera server on the device. The app i have been using is [Cameraserve](https://github.com/arktronic/cameraserve). Although it has not been updated since 2019, it is a Free & Open source app that does everything I could want (It also dosent have ads or telemetry :) ). You can also just download one of the many ip camera apps on google play if you find that easier. Anyway, Once you have all of that set up run the app, and add the ip cam in Zoneminder. [There are multiple guides on how to do this](https://zoneminder.readthedocs.io/en/stable/userguide/gettingstarted.html). cURL setting seems to work with the above app
