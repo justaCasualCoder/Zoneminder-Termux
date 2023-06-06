@@ -2,6 +2,30 @@
 #Arg Parse from https://betterdev.blog/minimal-safe-bash-script-template/
 #justaCasualCoder 2023 - https://github.com/justaCasualCoder
 RED='\033[0;31m'
+usage() {
+  cat <<EOF
+Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-d]
+
+Script for installing Zoneminder on Termux
+
+Available options:
+
+-h, --help      Print this help and exit
+-d, --debug     Print script debug info
+-b, --beta      Use beta script  
+EOF
+  exit
+}
+  while :; do
+    case "${1-}" in
+    -h | --help) usage ;;
+    -d | --debug) set -x ;;
+    -b | --beta) BETA=1 ;;
+    -?*) echo "Unknown option: $1" && exit 0 ;;
+    *) break ;;
+    esac
+    shift
+  done 
 install_evserver() {
 apt install git -y
 git clone https://github.com/zoneminder/zmeventnotification.git
