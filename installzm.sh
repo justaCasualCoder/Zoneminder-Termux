@@ -40,7 +40,7 @@ openssl req -x509 -nodes -days 4096 -newkey rsa:2048 -keyout /etc/zm/apache2/ssl
 ./install.sh
 echo "Install Complete! - You still have to edit /etc/zm/secrets.ini to contain your IP address and admin password"
 }
-echo -n "Which version of ZM do you want to use? [1.34 or 1.36]: " ; read version
+echo -n "Which version of ZM do you want to use? [1.34 or 1.36]: " ; read -p version
 case $version in
     1.34)
      echo "You selected 1.34!"
