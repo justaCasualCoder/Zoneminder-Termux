@@ -42,7 +42,7 @@ echo "Install Complete! - You still have to edit /etc/zm/secrets.ini to contain 
 }
 echo -n "Which version of ZM do you want to use? [1.34 or 1.36]: " ; read version
 case $version in
-	1.34)
+    1.34)
      echo "You selected 1.34!"
      ;;
     1.36)
