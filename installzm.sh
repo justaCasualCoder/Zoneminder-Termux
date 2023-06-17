@@ -69,13 +69,12 @@ CREATE DATABASE zm;
 CREATE USER zmuser@localhost IDENTIFIED BY 'zmpass';
 GRANT ALL ON zm.* TO zmuser@localhost;
 FLUSH PRIVILEGES;
-END;
 EOF
 if [ $version == "1.34" ]; then
     apt install zoneminder -y
 else 
      echo 'deb http://deb.debian.org/debian bullseye-backports main contrib' >> /etc/apt/sources.list
-     apt update && apt -t bullseye-backports install zoneminder
+     apt update && apt -t bullseye-backports install zoneminder -y
 fi
 mariadb -u zmuser -pzmpass < /usr/share/zoneminder/db/zm_create.sql
 chgrp -c www-data /etc/zm/zm.conf
