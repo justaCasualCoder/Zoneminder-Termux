@@ -13,7 +13,7 @@ proot-distro login debian
 ```
 4. Install Zoneminder!
 ```
-curl -sSL "https://raw.githubusercontent.com/justaCasualCoder/Zoneminder-Termux/main/installzm.sh" | bash
+wget https://raw.githubusercontent.com/justaCasualCoder/Zoneminder-Termux/main/installzm.sh && bash installzm.sh
 ```
 
 ### What the bash script does
