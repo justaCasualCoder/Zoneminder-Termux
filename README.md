@@ -4,6 +4,7 @@ This is a bash script which auto installs Zoneminder , Apache2 , and Mariadb in 
 1. Donwload [Termux](https://f-droid.org/en/packages/com.termux/)
 2. Set up a proot container 
 ```
+pkg install proot-distro
 termux-setup-storage
 proot-distro install debian
 ```
@@ -13,7 +14,7 @@ proot-distro login debian
 ```
 4. Install Zoneminder!
 ```
-wget https://raw.githubusercontent.com/justaCasualCoder/Zoneminder-Termux/main/installzm.sh && bash installzm.sh
+curl https://raw.githubusercontent.com/justaCasualCoder/Zoneminder-Termux/main/installzm.sh -o installzm.sh && bash installzm.sh
 ```
 
 ### What the bash script does
